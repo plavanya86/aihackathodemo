@@ -1,0 +1,67 @@
+{
+  "database": "AI Project Management System",
+  "tables": {
+    "projects": {
+      "description": "Stores project-level information",
+      "columns": {
+        "project_id": { "type": "INTEGER", "key": "PRIMARY KEY", "description": "Unique project identifier" },
+        "project_name": { "type": "TEXT", "description": "Name of the project" },
+        "start_date": { "type": "TEXT", "description": "Project start date" },
+        "end_date": { "type": "TEXT", "description": "Project end date" },
+        "status": { "type": "TEXT", "description": "Current project status" }
+      }
+    },
+
+    "sprints": {
+      "description": "Stores sprint information for projects",
+      "columns": {
+        "sprint_id": { "type": "INTEGER", "key": "PRIMARY KEY", "description": "Unique sprint identifier" },
+        "sprint_name": { "type": "TEXT", "description": "Sprint name" },
+        "start_date": { "type": "TEXT", "description": "Sprint start date" },
+        "end_date": { "type": "TEXT", "description": "Sprint end date" },
+        "project_id": { "type": "INTEGER", "key": "FOREIGN KEY", "description": "Associated project" }
+      }
+    },
+
+    "tasks": {
+      "description": "Stores tasks executed during sprints",
+      "columns": {
+        "task_id": { "type": "INTEGER", "key": "PRIMARY KEY", "description": "Unique task identifier" },
+        "task_title": { "type": "TEXT", "description": "Task description" },
+        "status": { "type": "TEXT", "description": "Task status" },
+        "priority": { "type": "TEXT", "description": "Task priority" },
+        "assigned_to": { "type": "INTEGER", "description": "Assigned team member" },
+        "sprint_id": { "type": "INTEGER", "key": "FOREIGN KEY", "description": "Sprint reference" }
+      }
+    },
+
+    "defects": {
+      "description": "Stores defects linked to tasks",
+      "columns": {
+        "defect_id": { "type": "INTEGER", "key": "PRIMARY KEY", "description": "Unique defect identifier" },
+        "defect_title": { "type": "TEXT", "description": "Defect description" },
+        "severity": { "type": "TEXT", "description": "Defect severity" },
+        "status": { "type": "TEXT", "description": "Defect status" },
+        "task_id": { "type": "INTEGER", "key": "FOREIGN KEY", "description": "Related task" }
+      }
+    }
+  },
+
+  "relationships": [
+    {
+      "from": "projects.project_id",
+      "to": "sprints.project_id",
+      "type": "one-to-many"
+    },
+    {
+      "from": "sprints.sprint_id",
+      "to": "tasks.sprint_id",
+      "type": "one-to-many"
+    },
+    {
+      "from": "tasks.task_id",
+      "to": "defects.task_id",
+      "type": "one-to-many"
+    }
+  ]
+}
