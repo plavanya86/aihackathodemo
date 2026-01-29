@@ -13,14 +13,6 @@ from openai import AzureOpenAI
 # Azure OpenAI Client
 # -----------------------------
 
-client = AzureOpenAI(
-    api_key="76iR6QZTDWlbPZLloG0dycl2CPHYXw9rfnYcgyr7BvKLn6yBdYKIJQQJ99BLACYeBjFXJ3w3AAABACOGSRML",
-    azure_endpoint="https://projectpulselab.openai.azure.com/",
-    api_version="2024-02-01"
-)
-
-DEPLOYMENT_NAME = "gpt-4.1-mini-projectpulse"
-DB_PATH = "C:/Users/pamarthi.padmavathi/git/aihackathodemo/ai_rangers.db"
 
 
 
