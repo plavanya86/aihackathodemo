@@ -44,8 +44,32 @@
         "status": { "type": "TEXT", "description": "Defect status" },
         "task_id": { "type": "INTEGER", "key": "FOREIGN KEY", "description": "Related task" }
       }
+    },
+    "team_members": {
+      "description": "Stores team members working on projects",
+      "columns": {
+        "member_id": {
+          "type": "INTEGER",
+          "key": "PRIMARY KEY",
+          "description": "Unique team member identifier"
+        },
+        "member_name": {
+          "type": "TEXT",
+          "description": "Name of the team member"
+        },
+        "role": {
+          "type": "TEXT",
+          "description": "Role of the team member"
+        },
+        "project_id": {
+          "type": "INTEGER",
+          "key": "FOREIGN KEY",
+          "description": "Project the member belongs to"
+        }
+      }
     }
   },
+  
 
   "relationships": [
     {
@@ -62,6 +86,16 @@
       "from": "tasks.task_id",
       "to": "defects.task_id",
       "type": "one-to-many"
-    }
+    },
+    {
+      "from": "projects.project_id",
+      "to": "team_members.project_id",
+      "type": "one-to-many"
+   },
+   {
+      "from": "team_members.member_id",
+      "to": "tasks.assigned_to",
+      "type": "one-to-many"
+   }
   ]
 }
